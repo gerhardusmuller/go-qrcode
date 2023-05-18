@@ -190,14 +190,16 @@ func (d *dataEncoder) encode(data []byte) (*bitset.Bitset, error) {
 		optimizedLength += length
 	}
 
-	singleByteSegmentLength, err := d.encodedLength(highestRequiredMode, len(d.data))
-	if err != nil {
-		return nil, err
-	}
+//	singleByteSegmentLength, err := d.encodedLength(highestRequiredMode, len(d.data))
+//	if err != nil {
+//		return nil, err
+//	}
 
-	if singleByteSegmentLength <= optimizedLength {
-		d.optimised = []segment{segment{dataMode: highestRequiredMode, data: d.data}}
-	}
+    // we always want a single segment for binary qr, simply implement for all
+//	if singleByteSegmentLength <= optimizedLength {
+//		d.optimised = []segment{segment{dataMode: highestRequiredMode, data: d.data}}
+//	}
+    d.optimised = []segment{segment{dataMode: highestRequiredMode, data: d.data}}
 
 	// Encode data.
 	encoded := bitset.New()
